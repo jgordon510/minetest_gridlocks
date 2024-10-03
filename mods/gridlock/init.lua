@@ -300,14 +300,29 @@ end
 
 local function open_8x8_door()
     minetest.log("opening 8x8 door!")
-    local pos1 = {x = -12, y = 29, z = 9}
-    minetest.swap_node(pos1, {name="doors:door_glass_c", param2=1})
-    local pos2 = {x = -11, y = 29, z = 9}
-    minetest.swap_node(pos2, {name="doors:door_glass_c", param2=3})
-    minetest.sound_play({name = "doors_glass_door_open", gain = 1},
+    local pos1 = {x = -11, y = 29, z = 33}
+    local pos2 = {x = -10, y = 29, z = 33}
+    local above = {x = 0 , y=1 , z = 0}
+    minetest.swap_node(vector.add(pos1, above), {name="scifi_nodes:black_door_opened_top", param2=0})
+    minetest.swap_node(vector.add(pos2, above), {name="scifi_nodes:black_door_opened_top", param2=2})
+    minetest.swap_node(pos1, {name="scifi_nodes:black_door_opened", param2=0})
+    minetest.swap_node(pos2, {name="scifi_nodes:black_door_opened", param2=2})
+    minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
 			{pos = pos1}, true)
 end
 
+local function close_8x8_door()
+    minetest.log("closing 8x8 door!")
+    local pos1 = {x = -11, y = 29, z = 33}
+    local pos2 = {x = -10, y = 29, z = 33}
+    local above = {x = 0 , y=1 , z = 0}
+    minetest.swap_node(vector.add(pos1, above), {name="scifi_nodes:black_door_closed_top", param2=0})
+    minetest.swap_node(vector.add(pos2, above), {name="scifi_nodes:black_door_closed_top", param2=2})
+    minetest.swap_node(pos1, {name="scifi_nodes:black_door_closed", param2=0})
+    minetest.swap_node(pos2, {name="scifi_nodes:black_door_closed", param2=2})
+    minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
+			{pos = pos1}, true)
+end
 --general player progression function
 --called after a successful win_check
 local function progress(player)
@@ -720,7 +735,6 @@ minetest.register_on_joinplayer(function(player)
     --it might be better to serialize that info, but oh well
     --todo reactivate
     minetest.after(1, read_in_statements)
-    
 end)
 
 --a very basic inventory 
@@ -774,8 +788,9 @@ minetest.register_globalstep(function(dtime)
         local pos1 = {x = -16, y=22, z=-2} --basement door
         local pos2a = {x = -11, y=29, z=10} --5x5 glass door 1
         local pos2b = {x = -12, y=29, z=10} --5x5 glass door 2
-        local pos3a = {x = -11, y=29, z=33} --8x8 sliding door 1
-        local pos3b = {x = -10, y=29, z=33} --8x8 sliding door 2
+        local pos3a = {x = -11, y=29, z=34} --8x8 sliding door 1
+        local pos3b = {x = -10, y=29, z=34} --8x8 sliding door 2
+
         if isSamePos(pos, pos1) then --basement
             if not Gridlock.flag1 then
                 Gridlock.flag1 = true
@@ -791,7 +806,7 @@ minetest.register_globalstep(function(dtime)
         if isSamePos(pos, pos3a) or isSamePos(pos, pos3b) then --8x8
             if not Gridlock.flag3 then
                 Gridlock.flag3 = true
-                --close_8x8_door()
+                close_8x8_door()
             end
         end
     end
