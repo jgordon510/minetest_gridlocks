@@ -54,6 +54,13 @@ local function update_statements()
     end
 end
 
+local function update_puzzle()
+    local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
+    local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
+    local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
+    minetest.set_node(puzzle_pos, {name=name, param2 = param2})
+end
+
 --show/hide the coordinate labels on the board
 local function update_labels()
     local size = Gridlock.boards[Gridlock.board_n].size
@@ -277,6 +284,16 @@ local function close_5x5_door()
 			{pos = pos1}, true)
 end
 
+local function open_8x8_door()
+    minetest.log("opening 8x8 door!")
+    local pos1 = {x = -12, y = 29, z = 9}
+    minetest.swap_node(pos1, {name="doors:door_glass_c", param2=1})
+    local pos2 = {x = -11, y = 29, z = 9}
+    minetest.swap_node(pos2, {name="doors:door_glass_c", param2=3})
+    minetest.sound_play({name = "doors_glass_door_open", gain = 1},
+			{pos = pos1}, true)
+end
+
 --general player progression function
 --called after a successful win_check
 local function progress(player)
@@ -294,10 +311,13 @@ local function progress(player)
         Gridlock.puzzle_n = 1
         open_5x5_door()
     end
-    local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
-    local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
-    local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
-    minetest.set_node(puzzle_pos, {name=name, param2 = param2})
+    if Gridlock.board_n == 3 and Gridlock.puzzle_n == 9 then
+        Gridlock.board_n = 4
+        Gridlock.puzzle_n = 1
+        open_8x8_door()
+    end
+    
+    update_puzzle()
     local meta = player:get_meta()
     
     meta:set_int("board_n", Gridlock.board_n)
@@ -640,10 +660,8 @@ minetest.register_on_newplayer(function(player)
 
     minetest.after(1, function()
         --load the puzzle onto the wall and slam the door (noise)
-        local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
-        local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
-        local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
-        minetest.set_node(puzzle_pos, {name=name, param2 = param2})
+
+        update_puzzle()
         minetest.sound_play({name = "xpanes_steel_bar_door_close", gain = 0.5},{pos = puzzle_pos}, true)
     end)
 end)
@@ -667,11 +685,7 @@ minetest.register_on_joinplayer(function(player)
     -- minetest.log("board_n:" .. Gridlock.board_n)
     -- minetest.log("puzzle:" .. Gridlock.puzzle_n)
     -- load the puzzle onto the wall
-    local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
-    local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
- 
-    local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
-    minetest.set_node(puzzle_pos, {name=name, param2 = param2})
+    update_puzzle()
     --this reads back in the statements off of the wall
     --it might be better to serialize that info, but oh well
     --todo reactivate
