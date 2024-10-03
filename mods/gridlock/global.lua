@@ -108,7 +108,7 @@ Gridlock.boards = {
     {
         statements_pos = {x = -3, y = 30, z = 32},
         board_pos = {x = -13, y=43, z = 25},
-        puzzle_pos = {x = -13, y=30, z = 18},
+        puzzle_pos = {x = -13, y=31, z = 17},
         puzzle_param2 = 0,
         size={w=8, h=8},
         tray_width = 12,

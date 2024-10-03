@@ -57,8 +57,22 @@ end
 local function update_puzzle()
     local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
     local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
-    local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
-    minetest.set_node(puzzle_pos, {name=name, param2 = param2})
+    if Gridlock.board_n < 3 then
+        local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
+        minetest.set_node(puzzle_pos, {name=name, param2 = param2})
+    else
+        local offsets = {
+            {x=0, y=0, z=0},
+            {x=0, y=0, z=1},
+            {x=0, y=-1, z=0},
+            {x=0, y=-1, z=1},
+        }
+        for tile = 1, 4 do
+            local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n .. "_" .. tile
+            minetest.set_node(vector.add(puzzle_pos, offsets[tile]), {name=name, param2 = param2})
+        end
+    end
+    
 end
 
 --show/hide the coordinate labels on the board
@@ -597,19 +611,35 @@ end
 --in 16x16 they might be split into 4 cubes
 function register_puzzle_node(room, puzzle) 
     local name = modname .. ":puz_" .. room .. "_" .. puzzle
-    local fn =  modname .. "_puzzle_" .. room .. "_" .. puzzle .. ".png"
+    
     local blank = "gridlock_blank.png"
     if room == 1 then blank = "default_cobble.png" end
     local tiles = nil
-    if room == 1 then tiles = {blank, blank, fn, blank, blank, blank } end
-    if room == 2 then tiles = {blank, blank, fn, blank, blank, blank } end
-    if room == 3 then tiles = {blank, blank, fn, blank, blank, blank } end
-    minetest.register_node(name, {
-        description = "gridlock block: puzzle_".. room .. "_" .. puzzle,
-        tiles = tiles,
-        --groups = {not_in_creative_inventory = 1},
-        paramtype2 = "facedir"
-    })
+    
+    if room < 3 then 
+        local fn =  modname .. "_puzzle_" .. room .. "_" .. puzzle .. ".png"
+        if room == 1 then tiles = {blank, blank, fn, blank, blank, blank } end
+        if room == 2 then tiles = {blank, blank, fn, blank, blank, blank } end
+        minetest.register_node(name, {
+            description = "gridlock block: puzzle_".. room .. "_" .. puzzle,
+            tiles = tiles,
+            --groups = {not_in_creative_inventory = 1},
+            paramtype2 = "facedir"
+        })
+    else
+        for n = 1, 4 do
+            local fn =  modname .. "_puzzle_" .. room .. "_" .. puzzle ..  "_" .. n ..".png"
+            if room == 3 then tiles = {blank, blank, fn, blank, blank, blank } end
+            minetest.register_node(name .. "_" .. n, {
+                description = "gridlock block: puzzle_".. room .. "_" .. puzzle .. "_" .. n,
+                tiles = tiles,
+                --groups = {not_in_creative_inventory = 1},
+                paramtype2 = "facedir"
+            })
+        end
+    end
+
+    
 end
 
 --room 1 has 3 3x3 puzzles
@@ -690,6 +720,7 @@ minetest.register_on_joinplayer(function(player)
     --it might be better to serialize that info, but oh well
     --todo reactivate
     minetest.after(1, read_in_statements)
+    
 end)
 
 --a very basic inventory 
