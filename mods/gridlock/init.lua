@@ -719,19 +719,19 @@ minetest.register_globalstep(function(dtime)
         local pos2b = {x = -12, y=29, z=10} --5x5 glass door 2
         local pos3a = {x = -11, y=29, z=33} --8x8 sliding door 1
         local pos3b = {x = -10, y=29, z=33} --8x8 sliding door 2
-        if isSamePos(pos, pos1) then
+        if isSamePos(pos, pos1) then --basement
             if not Gridlock.flag1 then
                 Gridlock.flag1 = true
                 close_basement_door()
             end
         end
-        if isSamePos(pos, pos2a) or isSamePos(pos, pos2b) then
+        if isSamePos(pos, pos2a) or isSamePos(pos, pos2b) then --5x5
             if not Gridlock.flag2 then
                 Gridlock.flag2 = true
                 close_5x5_door()
             end
         end
-        if isSamePos(pos, pos3a) or isSamePos(pos, pos3b) then
+        if isSamePos(pos, pos3a) or isSamePos(pos, pos3b) then --8x8
             if not Gridlock.flag3 then
                 Gridlock.flag3 = true
                 --close_8x8_door()
