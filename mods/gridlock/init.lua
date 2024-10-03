@@ -279,7 +279,10 @@ display_api.register_display_entity(modname .. ":blockdisplay")
 local blank = "gridlock_blank.png"
 for key, value in pairs(Gridlock.blocks) do
     local fn = "gridlock_" .. key .. ".png"
-    
+    local aspect =  1
+    if string.len(Gridlock.display_labels[key]) > 2 then
+        aspect = 1/2
+    end
     minetest.register_node(modname .. ":" .. key, {
         description = "gridlock block: " .. key,
         tiles = {blank, blank, blank, blank, blank, blank },
@@ -296,6 +299,7 @@ for key, value in pairs(Gridlock.blocks) do
             return nil
         end,
         drop={},
+        
         display_entities = {
             [modname .. ":blockdisplay"] = {
                 size = { x = 0.8, y = 0.8 },
@@ -304,7 +308,7 @@ for key, value in pairs(Gridlock.blocks) do
                 top = 0,
                 on_display_update = font_api.on_display_update,
                 font_name = "botic",
-                aspect_ratio = 1,
+                aspect_ratio = aspect,
                 --top = 0,
                 color = "#FFFFFF",
                 yaw = math.pi/2
@@ -318,8 +322,6 @@ for key, value in pairs(Gridlock.blocks) do
             display_api.on_construct(pos)
         end,
         on_receive_fields = set_fields,
-        --paramtype2 = "facedir"
-        
     })
     --likewise, these blocks are used to make the statement blocks on the back wall
     minetest.register_node(modname .. ":" .. key .. "_statement", {
@@ -333,7 +335,7 @@ for key, value in pairs(Gridlock.blocks) do
                 depth = -0.5 - display_api.entity_spacing,
                 on_display_update = font_api.on_display_update,
                 font_name = "botic",
-                aspect_ratio = 1,
+                aspect_ratio = aspect,
                 top = 0,
                 color = "#FFFFFF",
             }
@@ -432,6 +434,7 @@ for i = 0, 15 do
     minetest.register_node(modname .. ":color_" .. i, {
         description = "gridlock block: color " .. i,
         tiles = {blank, blank, fn, blank, blank, blank },
+        inventory_image = fn,
         groups = {oddly_breakable_by_hand = 3, not_in_creative_inventory = 1},
         on_place = function(itemstack, placer, pointed_thing)
             local pos = pointed_thing.above
@@ -571,6 +574,12 @@ for room = 2, 2 do
         register_puzzle_node(room, puzzle)
     end
     
+end
+
+for room = 3, 3 do
+    for puzzle = 1, 8 do
+        register_puzzle_node(room, puzzle)
+    end
 end
 
 
