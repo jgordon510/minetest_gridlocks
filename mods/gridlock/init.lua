@@ -246,6 +246,18 @@ local function openBasementDoor()
 			{pos = pos}, true)
 end
 
+local function open5x5Door()
+    minetest.log("opening 5x5 door!")
+    --doors:door_glass_c;1 -12 29 9
+    --doors:door_glass_d;3 -11 29 9
+    local pos1 = {x = -12, y = 29, z = 9}
+    minetest.swap_node(pos1, {name="doors:door_glass_c", param2=1})
+    local pos2 = {x = -11, y = 29, z = 9}
+    minetest.swap_node(pos2, {name="doors:door_glass_c", param2=3})
+    minetest.sound_play({name = "doors_glass_door_open", gain = 1},
+			{pos = pos1}, true)
+end
+
 --general player progression function
 --called after a successful wincheck
 local function progress(player)
@@ -261,8 +273,8 @@ local function progress(player)
     if Gridlock.board_n == 2 and Gridlock.puzzle_n == 7 then
         Gridlock.board_n = 3
         Gridlock.puzzle_n = 1
-        minetest.log("end of the road! add more puzzles")
-        return
+        open5x5Door()
+        return --todo remove
     end
     local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
     local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
@@ -601,8 +613,8 @@ minetest.register_on_newplayer(function(player)
     player:set_pos(Gridlock.spawn_point)
     local meta = player:get_meta()
     --progression
-    Gridlock.board_n = 1
-    Gridlock.puzzle_n = 1
+    Gridlock.board_n = 2
+    Gridlock.puzzle_n = 6
     meta:set_int("board_n", Gridlock.board_n)
     meta:set_int("puzzle_n", Gridlock.puzzle_n)
     Gridlock.statements = {}
