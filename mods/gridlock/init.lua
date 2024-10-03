@@ -274,7 +274,6 @@ local function progress(player)
         Gridlock.board_n = 3
         Gridlock.puzzle_n = 1
         open5x5Door()
-        return --todo remove
     end
     local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
     local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
@@ -565,10 +564,11 @@ function register_puzzle_node(room, puzzle)
     local tiles = nil
     if room == 1 then tiles = {blank, blank, fn, blank, blank, blank } end
     if room == 2 then tiles = {blank, blank, fn, blank, blank, blank } end
+    if room == 3 then tiles = {blank, blank, fn, blank, blank, blank } end
     minetest.register_node(name, {
         description = "gridlock block: puzzle_".. room .. "_" .. puzzle,
         tiles = tiles,
-        groups = {not_in_creative_inventory = 1},
+        --groups = {not_in_creative_inventory = 1},
         paramtype2 = "facedir"
     })
 end
@@ -613,8 +613,8 @@ minetest.register_on_newplayer(function(player)
     player:set_pos(Gridlock.spawn_point)
     local meta = player:get_meta()
     --progression
-    Gridlock.board_n = 2
-    Gridlock.puzzle_n = 6
+    Gridlock.board_n = 1
+    Gridlock.puzzle_n = 1
     meta:set_int("board_n", Gridlock.board_n)
     meta:set_int("puzzle_n", Gridlock.puzzle_n)
     Gridlock.statements = {}
