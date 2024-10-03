@@ -746,13 +746,25 @@ minetest.item_drop = function(itemstack, dropper, pos)
     return itemstack
 end
 
+local no_digs = {
+    "xpanes:pane_flat",
+    "default:torch_wall",
+    "doors:door_glass_a",
+    "doors:door_glass_b",
+    "doors:door_glass_c",
+    "doors:door_glass_d",
+    "default:wood",
+    "scifi_nodes:octgrn_pane",
+    "scifi_nodes:black_door_closed",
+    "scifi_nodes:white_door_closed",
+}
+for _, name in pairs(no_digs) do
+    minetest.override_item(name, {
+        groups={}
+    })
+end
 
-minetest.override_item("xpanes:pane_flat", {
-    groups={}
-})
-minetest.override_item("default:torch_wall", {
-    groups={}
-})
+
 
 
 minetest.register_globalstep(function(dtime)
