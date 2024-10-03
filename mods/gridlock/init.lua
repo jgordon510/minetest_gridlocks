@@ -6,6 +6,9 @@ local COLOR_INPUT_POS =  {x=1, y=-1, z=0}
 Gridlock = {}
 dofile(modpath .. "/global.lua")
 
+local function isSamePos(pos1, pos2)
+    return pos1.x == pos2.x and pos1.y == pos2.y and pos1.z == pos2.z
+end
 --used to set diplay fields for coordinate and token nodes
 local function set_fields(pos,  display_text )
 	local meta = minetest.get_meta(pos)
@@ -192,7 +195,7 @@ local function read_in_statements()
 end
 
 --checks if the puzzle matches the solution
-local function winCheck()
+local function win_check()
     local chars = {}
     chars[0] = "0"
     chars[1] = "1"
@@ -230,15 +233,15 @@ local function winCheck()
         end
         
         local puzzleLine = Gridlock.puzzles[Gridlock.board_n][Gridlock.puzzle_n][y]
-        minetest.log("puzzle: " .. puzzleLine)
-        minetest.log("line:   " .. line)
+        --minetest.log("puzzle: " .. puzzleLine)
+        --minetest.log("line:   " .. line)
         if line ~= puzzleLine then return false end
     end
     return true
 end
 
 --opens the basement door after completing the 3x3, called by progress
-local function openBasementDoor()
+local function open_basement_door()
     minetest.log("opening basement door!")
     local pos = {x = -16, y = 22, z = -1}
     minetest.swap_node(pos, {name="xpanes:door_steel_bar_c", param2=3})
@@ -246,10 +249,16 @@ local function openBasementDoor()
 			{pos = pos}, true)
 end
 
-local function open5x5Door()
+local function close_basement_door()
+    minetest.log("closing basement door!")
+    local pos = {x = -16, y = 22, z = -1}
+    minetest.swap_node(pos, {name="xpanes:door_steel_bar_a", param2=2})
+    minetest.sound_play({name = "xpanes_steel_bar_door_close", gain = 1},
+			{pos = pos}, true)
+end
+
+local function open_5x5_door()
     minetest.log("opening 5x5 door!")
-    --doors:door_glass_c;1 -12 29 9
-    --doors:door_glass_d;3 -11 29 9
     local pos1 = {x = -12, y = 29, z = 9}
     minetest.swap_node(pos1, {name="doors:door_glass_c", param2=1})
     local pos2 = {x = -11, y = 29, z = 9}
@@ -258,8 +267,18 @@ local function open5x5Door()
 			{pos = pos1}, true)
 end
 
+local function close_5x5_door()
+    minetest.log("closing 5x5 door!")
+    local pos1 = {x = -12, y = 29, z = 9}
+    minetest.swap_node(pos1, {name="doors:door_glass_a", param2=0})
+    local pos2 = {x = -11, y = 29, z = 9}
+    minetest.swap_node(pos2, {name="doors:door_glass_b", param2=0})
+    minetest.sound_play({name = "doors_glass_door_close", gain = 1},
+			{pos = pos1}, true)
+end
+
 --general player progression function
---called after a successful wincheck
+--called after a successful win_check
 local function progress(player)
     clear_statements()
     Gridlock.statements = {}
@@ -268,12 +287,12 @@ local function progress(player)
     if Gridlock.board_n == 1 and Gridlock.puzzle_n == 4 then
         Gridlock.board_n = 2
         Gridlock.puzzle_n = 1
-        openBasementDoor()
+        open_basement_door()
     end
     if Gridlock.board_n == 2 and Gridlock.puzzle_n == 7 then
         Gridlock.board_n = 3
         Gridlock.puzzle_n = 1
-        open5x5Door()
+        open_5x5_door()
     end
     local puzzle_pos = Gridlock.boards[Gridlock.board_n].puzzle_pos
     local param2 = Gridlock.boards[Gridlock.board_n].puzzle_param2
@@ -376,7 +395,7 @@ minetest.register_node(modname .. ":trigger", {
             read_from(pos, colorNode.name)
         end
         
-        if winCheck() then
+        if win_check() then
             minetest.sound_play({name = "gridlock_success", gain = 1},
 			{pos = pos}, true)
             minetest.after(2, progress, puncher)
@@ -678,9 +697,45 @@ function sfinv.make_formspec(player, context, content, show_inv, size)
     
 end
 
+minetest.item_drop = function(itemstack, dropper, pos)
+    return itemstack
+end
+
+
 minetest.override_item("xpanes:pane_flat", {
     groups={}
 })
 minetest.override_item("default:torch_wall", {
     groups={}
 })
+
+
+minetest.register_globalstep(function(dtime)
+    for _, player in ipairs(minetest.get_connected_players()) do
+        local pos = vector.round(player:get_pos())
+        -- Adjust the Y position slightly to get the node beneath the player
+        local pos1 = {x = -16, y=22, z=-2} --basement door
+        local pos2a = {x = -11, y=29, z=10} --5x5 glass door 1
+        local pos2b = {x = -12, y=29, z=10} --5x5 glass door 2
+        local pos3a = {x = -11, y=29, z=33} --8x8 sliding door 1
+        local pos3b = {x = -10, y=29, z=33} --8x8 sliding door 2
+        if isSamePos(pos, pos1) then
+            if not Gridlock.flag1 then
+                Gridlock.flag1 = true
+                close_basement_door()
+            end
+        end
+        if isSamePos(pos, pos2a) or isSamePos(pos, pos2b) then
+            if not Gridlock.flag2 then
+                Gridlock.flag2 = true
+                close_5x5_door()
+            end
+        end
+        if isSamePos(pos, pos3a) or isSamePos(pos, pos3b) then
+            if not Gridlock.flag3 then
+                Gridlock.flag3 = true
+                --close_8x8_door()
+            end
+        end
+    end
+end)
