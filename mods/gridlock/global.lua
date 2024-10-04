@@ -114,7 +114,8 @@ Gridlock.boards = {
         tray_width = 12,
         max_statements = 10, --double check this and add top frame to window
         border_node = modname .. ":brick"
-    }
+    },
+    --todo board 4 here
 }
 
 Gridlock.puzzles = {

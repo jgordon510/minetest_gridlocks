@@ -345,6 +345,10 @@ local function progress(player)
         Gridlock.puzzle_n = 1
         open_8x8_door()
     end
+    if Gridlock.board_n == 4 and Gridlock.puzzle_n == 6 then
+        minetest.log("END OF GAME GOES HERE!")
+        return
+    end
     
     update_puzzle()
     local meta = player:get_meta()
@@ -815,5 +819,8 @@ minetest.register_globalstep(function(dtime)
                 close_8x8_door()
             end
         end
+        --todo
+        --open and close last door here
+
     end
 end)
