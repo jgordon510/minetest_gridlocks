@@ -678,6 +678,12 @@ for room = 3, 3 do
     end
 end
 
+for room = 4, 4 do
+    for puzzle = 1, 5 do
+        register_puzzle_node(room, puzzle)
+    end
+end
+
 
 minetest.register_on_newplayer(function(player)
     --the inventory is 9x5
