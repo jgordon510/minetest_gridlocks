@@ -61,12 +61,23 @@ local function update_puzzle()
         local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n
         minetest.set_node(puzzle_pos, {name=name, param2 = param2})
     else
-        local offsets = {
-            {x=0, y=0, z=0},
-            {x=0, y=0, z=1},
-            {x=0, y=-1, z=0},
-            {x=0, y=-1, z=1},
-        }
+        local offsets = nil
+        if Gridlock.board_n == 3 then
+            offsets = {
+                {x=0, y=0, z=0},
+                {x=0, y=0, z=1},
+                {x=0, y=-1, z=0},
+                {x=0, y=-1, z=1},
+            }
+        else
+            offsets = {
+                {x=0, y=0, z=0},
+                {x=0, y=0, z=-1},
+                {x=0, y=-1, z=0},
+                {x=0, y=-1, z=-1},
+            }
+        end
+        
         for tile = 1, 4 do
             local name =  modname .. ":puz_" .. Gridlock.board_n .. "_" .. Gridlock.puzzle_n .. "_" .. tile
             minetest.set_node(vector.add(puzzle_pos, offsets[tile]), {name=name, param2 = param2})
@@ -320,6 +331,33 @@ local function close_8x8_door()
     minetest.swap_node(vector.add(pos2, above), {name="scifi_nodes:black_door_closed_top", param2=2})
     minetest.swap_node(pos1, {name="scifi_nodes:black_door_closed", param2=0})
     minetest.swap_node(pos2, {name="scifi_nodes:black_door_closed", param2=2})
+    minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
+			{pos = pos1}, true)
+end
+
+local function open_final_door()
+    minetest.log("opening final door!")
+    local pos1 = {x = -20, y=29, z=14} 
+    local pos2 = {x = -21, y=29, z=14} 
+
+    local above = {x = 0 , y=1 , z = 0}
+    minetest.swap_node(vector.add(pos1, above), {name="scifi_nodes:white_door_opened_top", param2=2})
+    minetest.swap_node(vector.add(pos2, above), {name="scifi_nodes:white_door_opened_top", param2=0})
+    minetest.swap_node(pos1, {name="scifi_nodes:white_door_opened", param2=2})
+    minetest.swap_node(pos2, {name="scifi_nodes:white_door_opened", param2=0})
+    minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
+			{pos = pos1}, true)
+end
+
+local function close_final_door()
+    minetest.log("closing final door!")
+    local pos1 = {x = -20, y=29, z=14} 
+    local pos2 = {x = -21, y=29, z=14} 
+    local above = {x = 0 , y=1 , z = 0}
+    minetest.swap_node(vector.add(pos1, above), {name="scifi_nodes:white_door_closed_top", param2=2})
+    minetest.swap_node(vector.add(pos2, above), {name="scifi_nodes:white_door_closed_top", param2=0})
+    minetest.swap_node(pos1, {name="scifi_nodes:white_door_closed", param2=2})
+    minetest.swap_node(pos2, {name="scifi_nodes:white_door_closed", param2=0})
     minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
 			{pos = pos1}, true)
 end
@@ -648,7 +686,9 @@ function register_puzzle_node(room, puzzle)
     else
         for n = 1, 4 do
             local fn =  modname .. "_puzzle_" .. room .. "_" .. puzzle ..  "_" .. n ..".png"
+            minetest.log(fn)
             if room == 3 then tiles = {blank, blank, fn, blank, blank, blank } end
+            if room == 4 then tiles = {blank, blank, blank, fn, blank, blank } end
             minetest.register_node(name .. "_" .. n, {
                 description = "gridlock block: puzzle_".. room .. "_" .. puzzle .. "_" .. n,
                 tiles = tiles,
@@ -800,27 +840,41 @@ minetest.register_globalstep(function(dtime)
         local pos2b = {x = -12, y=29, z=10} --5x5 glass door 2
         local pos3a = {x = -11, y=29, z=34} --8x8 sliding door 1
         local pos3b = {x = -10, y=29, z=34} --8x8 sliding door 2
-
+        local pos4a = {x = -20, y=29, z=18} --final sliding door open 2
+        local pos4b = {x = -21, y=29, z=18} --final sliding door open 2
+        local pos5a = {x = -20, y=29, z=13} --final sliding door close 2
+        local pos5b = {x = -21, y=29, z=13} --final sliding door close 2
+        local meta = player:get_meta()
+        
         if isSamePos(pos, pos1) then --basement
-            if not Gridlock.flag1 then
-                Gridlock.flag1 = true
+            if meta:get_int("flag1") == 0 then
+                meta:set_int("flag1", 1)
                 close_basement_door()
             end
         end
         if isSamePos(pos, pos2a) or isSamePos(pos, pos2b) then --5x5
-            if not Gridlock.flag2 then
-                Gridlock.flag2 = true
+            if meta:get_int("flag2") == 0  then
+                meta:set_int("flag2", 1)
                 close_5x5_door()
             end
         end
         if isSamePos(pos, pos3a) or isSamePos(pos, pos3b) then --8x8
-            if not Gridlock.flag3 then
-                Gridlock.flag3 = true
+            if meta:get_int("flag3") == 0  then
+                meta:set_int("flag3", 1)
                 close_8x8_door()
             end
         end
-        --todo
-        --open and close last door here
-
+        if isSamePos(pos, pos4a) or isSamePos(pos, pos4b) then --final open
+            if meta:get_int("flag4") == 0  then
+                meta:set_int("flag4", 1)
+                open_final_door()
+            end
+        end
+        if isSamePos(pos, pos5a) or isSamePos(pos, pos5b) then --final open
+            if meta:get_int("flag5") == 0  then
+                meta:set_int("flag5", 1)
+                close_final_door()
+            end
+        end
     end
 end)

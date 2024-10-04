@@ -115,6 +115,16 @@ Gridlock.boards = {
         max_statements = 10, --double check this and add top frame to window
         border_node = modname .. ":brick"
     },
+    {
+        statements_pos = {x = -19, y = 30, z = 10},
+        board_pos = {x = -37, y=55, z = 2},
+        puzzle_pos = {x = -19, y=31, z = 12},
+        puzzle_param2 = 0,
+        size={w=16, h=16},
+        tray_width = 15,
+        max_statements = 16, --double check this and add top frame to window
+        border_node = "scifi_nodes:white2"
+    },
     --todo board 4 here
 }
 
@@ -266,99 +276,125 @@ Gridlock.puzzles = {
     },
     {
         --arrow
+        --blue      c 
+        --ltgreen   b 
+        --dkgreen   3
+        --ltgrey    6
+        --dkgrey    5
+        --brown     4
+        --white     7
         {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "cccccccccccccccc",
+            "cccbcccccccccccc",
+            "ccc3bccccccccccc",
+            "cbb53ccccccccccc",
+            "cc334ccccccccccc",
+            "ccccc4cccccccccc",
+            "cccccc4ccccccccc",
+            "ccccccc4cccccccc",
+            "cccccccc4ccccccc",
+            "ccccccccc4cccccc",
+            "cccccccccc4ccccc",
+            "ccccccccccc4cccc",
+            "cccccccccccc47cc",
+            "cccccccccccc667c",
+            "ccccccccccccc55c",
+            "cccccccccccccccc",
         },
-        --heart
+        --heart 
+        --pink      e 
+        --red       8
+        --purple    2   
+        --black     0
+        --white     7
         {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "eeeeeeeeeeeeeeee",
+            "ee0000eeee0000ee",
+            "e088880ee088880e",
+            "0288888008888880",
+            "0288888888888880",
+            "0288888888888880",
+            "0288888888888880",
+            "0288888888888880",
+            "e02888888888880e",
+            "ee028888888880ee",
+            "eee0288888880eee",
+            "eeee02888880eeee",
+            "eeeee028880eeeee",
+            "eeeeee0280eeeeee",
+            "eeeeeee00eeeeeee",
+            "eeeeeeeeeeeeeeee",
         },
         --gem
+        --plum      d 
+        --dkgrey    5
+        --ltgreen   b
+        --dkgreen   3
+        --black     0
         {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "dddddddddddddddd",
+            "ddddd555555ddddd",
+            "dddd5bbbbbb5dddd",
+            "ddd5bbbbbb3b0ddd",
+            "dd5bbbbbb3b330dd",
+            "d5bbbb555533330d",
+            "d5bbb5b3b353330d",
+            "d5bbb53b3353330d",
+            "d5bbb5b33353330d",
+            "d5bb35333353330d",
+            "d5b3b3555533330d",
+            "dd5b3333333330dd",
+            "ddd0333333330ddd",
+            "dddd03333330dddd",
+            "ddddd000000ddddd",
+            "dddddddddddddddd",
         },
         --key
+        --pink      e
+        --black     0
+        --orange    9
+        --yellow    a
         {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "eeeeeeeeee000eee",
+            "eeeeeeeee09aa0ee",
+            "eeeeeeee0900a0ee",
+            "eeeeeeee090e0a0e",
+            "eeeeeeee09a00a0e",
+            "eeeeeeee09aaa0ee",
+            "eeeeeee09a000eee",
+            "eeeeee09a0eeeeee",
+            "eeeee09a0eeeeeee",
+            "eeee09a0eeeeeeee",
+            "eee09a0eeeeeeeee",
+            "ee09a0a0eeeeeeee",
+            "ee0a0a0a0eeeeeee",
+            "eee0a0a0eeeeeeee",
+            "eeee0a0eeeeeeeee",
+            "eeeee0eeeeeeeeee",
         },
         --sword
+        --purple    2
+        --plum      d
+        --dkgrey    5
+        --ltgrey    6
+        --brown     4
         {
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
+            "2222222222222000",
+            "22222222222206d0",
+            "2222222222206d50",
+            "222222222206d502",
+            "22222222206d5022",
+            "2222222206d50222",
+            "222002206d502222",
+            "22206006d5022222",
+            "2220660d50222222",
+            "222006d002222222",
+            "22220d5502222222",
+            "2220400550222222",
+            "2204020000222222",
+            "2040222222222222",
+            "0402222222222222",
+            "0022222222222222",
         }
     }
 }
