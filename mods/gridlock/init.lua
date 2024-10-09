@@ -2,7 +2,7 @@
 local modname = minetest.get_current_modname()
 local modpath = minetest.get_modpath(modname)
 local COLOR_INPUT_POS =  {x=1, y=-1, z=0}
-
+assert(minetest.is_singleplayer(), "This game is intended for single player only!")
 Gridlock = {}
 dofile(modpath .. "/global.lua")
 dofile(modpath .. "/music.lua")
