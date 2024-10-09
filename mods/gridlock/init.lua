@@ -647,7 +647,7 @@ end
 
 --these are displayed to the user as puzzles to solve
 --in 16x16 they might be split into 4 cubes
-function register_puzzle_node(room, puzzle) 
+local function register_puzzle_node(room, puzzle) 
     local name = modname .. ":puz_" .. room .. "_" .. puzzle
     local blank = "gridlock_blank.png"
     if room == 1 then blank = "default_cobble.png" end
