@@ -287,6 +287,19 @@ local function open_5x5_door()
 			{pos = pos1}, true)
 end
 
+local function open_5x5_window()
+    local start = {x = -9, y = 29, z = 7}
+    for y = 0, 5 do
+        for z = 0, -10, -1 do
+            local pos = vector.add(start, {x = 0, z = z, y = y})
+            minetest.after(y*0.5 , function() 
+                minetest.set_node(pos, {name="default:glass"})
+            end)
+            
+        end
+    end
+end
+
 local function close_5x5_door()
     local pos1 = {x = -12, y = 29, z = 9}
     minetest.swap_node(pos1, {name="doors:door_glass_a", param2=0})
@@ -306,6 +319,19 @@ local function open_8x8_door()
     minetest.swap_node(pos2, {name="scifi_nodes:black_door_opened", param2=2})
     minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
 			{pos = pos1}, true)
+end
+
+local function open_8x8_window()
+    local start = {x = -3, y = 30, z = 31}
+    for y = 0, 9 do
+        for z = 0, -13, -1 do
+            local pos = vector.add(start, {x = 0, z = z, y = y})
+            minetest.after(y*0.5 , function() 
+                minetest.set_node(pos, {name="scifi_nodes:octgrn_pane", param2 = 1})
+            end)
+            
+        end
+    end
 end
 
 local function close_8x8_door()
@@ -376,11 +402,13 @@ local function progress(player)
         Gridlock.board_n = 3
         Gridlock.puzzle_n = 1
         open_5x5_door()
+        open_5x5_window()
     end
     if Gridlock.board_n == 3 and Gridlock.puzzle_n == 9 then
         Gridlock.board_n = 4
         Gridlock.puzzle_n = 1
         open_8x8_door()
+        open_8x8_window()
     end
     if Gridlock.board_n == 4 and Gridlock.puzzle_n == 6 then
         Gridlock.board_n = 5
@@ -591,7 +619,7 @@ for i = 0, 15 do
         })
 end
 
---a staggered fourcefield with 16 separate sheets
+--a staggered forcefield with 16 separate sheets
 --the on_place function assists in putting them down
 for i = 1, 16 do
     minetest.register_node(modname .. ":forcefield_" .. i, {
@@ -614,7 +642,7 @@ for i = 1, 16 do
                 length = 2,
             }
         }},
-        on_place =function(itemstack, placer, pointed_thing) 
+        on_place = function(itemstack, placer, pointed_thing) 
             local n = 0
             local pos = table.copy(pointed_thing.above)
             
@@ -867,11 +895,20 @@ minetest.register_chatcommand("gl-progress", {
 		if #p == 2 then
 			Gridlock.board_n = tonumber(p[1])
 			Gridlock.puzzle_n = tonumber(p[2])
-            
+            progress(minetest.get_player_by_name(name))
 			return true, "Progression set!"
 		else
 			return false, "Usage: /gl-progress board_n puzzle_n"
 		end
 	end
 })
+
+-- minetest.register_chatcommand("gl-open", {
+-- 	params = "gridlock",
+-- 	description = "test open",
+-- 	privs = {server = true},
+-- 	func = function(name, param)
+-- 		open_8x8_window()
+-- 	end
+-- })
 

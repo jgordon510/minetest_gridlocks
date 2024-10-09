@@ -85,7 +85,7 @@ Gridlock.display_labels = {
 
 Gridlock.load_order = {"x", "y", "_0", "_1","_2","_3","_4","_5","_6","_7","_8","_9", "add", "sub", "mul", "div", "eq", "neq" , "gt" , "lt" , "gte", "lte", "_or", "_and", "_not", "mod", "abs", "paren1", "paren2"}
 Gridlock.boards = {
-    {
+    { --3x3
         statements_pos = {x=-15, y=22, z=3},--{x = 14, y = 2, z = -5}, --add one to x
         board_pos = {x=-19, y=28, z=1}, --{x = 11, y=8, z = -1}, add 4 to y
         puzzle_pos = {x=-17, y=23, z=4}, --{x = 9, y=3, z = -3},
@@ -95,7 +95,7 @@ Gridlock.boards = {
         max_statements = 5,
         border_node = "default:cobble"
     }, 
-    {
+    { --5x5
         statements_pos = {x = -9, y = 29, z = 7},
         board_pos = {x = -18, y=37, z = 1},
         puzzle_pos = {x = -18, y=30, z = -3},
@@ -103,19 +103,19 @@ Gridlock.boards = {
         size={w=5, h=5},
         tray_width = 9,
         max_statements = 6, --double check this and add top frame to window
-        border_node = modname .. ":brick"
+        border_node = "scifi_nodes:white2"
     },
-    {
-        statements_pos = {x = -3, y = 30, z = 32},
+    { --8x8
+        statements_pos = {x = -3, y = 30, z = 31},
         board_pos = {x = -13, y=43, z = 25},
         puzzle_pos = {x = -13, y=31, z = 17},
         puzzle_param2 = 0,
         size={w=8, h=8},
         tray_width = 12,
         max_statements = 10, --double check this and add top frame to window
-        border_node = modname .. ":brick"
+        border_node = "scifi_nodes:white2"
     },
-    {
+    { --16x16
         statements_pos = {x = -19, y = 30, z = 10},
         board_pos = {x = -37, y=55, z = 2},
         puzzle_pos = {x = -19, y=31, z = 12},
