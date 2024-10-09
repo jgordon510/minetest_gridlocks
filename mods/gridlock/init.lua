@@ -634,17 +634,6 @@ for i = 1, 16 do
     }) 
 end
 
---deprecated coordinates causes an error in the lab mod
---a new map should remove this requirement
-for y = 1, 5 do
-    for x = 1, 5 do
-        local fn = "gridlock_coord_" .. ((y-1)*5 + (x)) .. ".png"
-        minetest.register_node(modname .. ":coord_" .. x .. '_' .. y, {
-            
-        })
-    end
-end
-
 --these are displayed to the user as puzzles to solve
 --in 16x16 they might be split into 4 cubes
 local function register_puzzle_node(room, puzzle) 
@@ -729,9 +718,7 @@ minetest.register_on_newplayer(function(player)
     local inv = player:get_inventory()
     inv:set_size("main", 9*5)
     for _, key in pairs(Gridlock.load_order) do
-        if key ~= "abs2" then
-            inv:add_item("main", ItemStack(modname .. ":" .. key ))
-        end
+        inv:add_item("main", ItemStack(modname .. ":" .. key ))
     end
     --...and 16 color blocks
     for i = 0, 15 do
