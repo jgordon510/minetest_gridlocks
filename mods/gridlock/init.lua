@@ -33,7 +33,6 @@ end
 --these are displayed along with the color of each statement on the back wall
 local function update_statements()
     clear_statements()
-    minetest.log("updating statements...")
     local pos = Gridlock.boards[Gridlock.board_n].statements_pos
     local startY = pos.y + #Gridlock.statements
     for y, statement in pairs(Gridlock.statements) do
@@ -48,7 +47,6 @@ local function update_statements()
                 name = name .. "_statement"
                 param2 = 1
             end
-            minetest.log(name)
             minetest.set_node(pos, {name=name, param2 = param2})
         end
     end
@@ -120,7 +118,6 @@ local function update_board(f, colorBlockName)
             local nodePos = {x=start.x , y = start.y-y, z=start.z + z}
             Gridlock.counters.x = z
             local node = minetest.get_node(nodePos)
-            -- minetest.log(node.name)
             if f() then
                 minetest.set_node(nodePos, {name=colorBlockName .. "_grid"})
             end
@@ -131,7 +128,6 @@ end
 --called by the trigger block
 --reads in the current statement from the block tray
 local function read_from(pos, colorBlockName)
-    minetest.log("read")
     local reading = true
     local z = pos.z+1
     local iters = 0
@@ -157,7 +153,6 @@ local function read_from(pos, colorBlockName)
             local name = string.gsub(node.name, modname..":", "")
             table.insert(stack, Gridlock.blocks[name])
             table.insert(block_names, node.name)
-            -- minetest.log(node.name)
         end
     end
     if #block_names <= 1 then
@@ -182,7 +177,6 @@ local function read_from(pos, colorBlockName)
     end
     minetest.remove_node(vector.add(COLOR_INPUT_POS, pos))
     table.insert(Gridlock.statements, block_names)
-    -- minetest.log(dump(Gridlock.statements))
     update_statements()
     update_board(f, colorBlockName)
 end
@@ -210,7 +204,6 @@ local function read_in_statements()
                 name = string.gsub(name, "_statement", "")
  
                 table.insert(statement,name)
-                -- minetest.log(name)
             end
             z = z + 1
         end
@@ -222,7 +215,6 @@ local function read_in_statements()
     if #Gridlock.statements == 0 then
         update_board(function() return true end , modname .. ":color_0")
     else
-        minetest.log(dump(Gridlock.statements))
     end
 end
 
@@ -265,8 +257,6 @@ local function win_check()
         end
         
         local puzzleLine = Gridlock.puzzles[Gridlock.board_n][Gridlock.puzzle_n][y]
-        --minetest.log("puzzle: " .. puzzleLine)
-        --minetest.log("line:   " .. line)
         if line ~= puzzleLine then return false end
     end
     return true
@@ -274,7 +264,6 @@ end
 
 --opens the basement door after completing the 3x3, called by progress
 local function open_basement_door()
-    minetest.log("opening basement door!")
     local pos = {x = -16, y = 22, z = -1}
     minetest.swap_node(pos, {name="xpanes:door_steel_bar_c", param2=3})
     minetest.sound_play({name = "xpanes_steel_bar_door_open", gain = 1},
@@ -282,7 +271,6 @@ local function open_basement_door()
 end
 
 local function close_basement_door()
-    minetest.log("closing basement door!")
     local pos = {x = -16, y = 22, z = -1}
     minetest.swap_node(pos, {name="xpanes:door_steel_bar_a", param2=2})
     minetest.sound_play({name = "xpanes_steel_bar_door_close", gain = 1},
@@ -290,7 +278,6 @@ local function close_basement_door()
 end
 
 local function open_5x5_door()
-    minetest.log("opening 5x5 door!")
     local pos1 = {x = -12, y = 29, z = 9}
     minetest.swap_node(pos1, {name="doors:door_glass_c", param2=1})
     local pos2 = {x = -11, y = 29, z = 9}
@@ -300,7 +287,6 @@ local function open_5x5_door()
 end
 
 local function close_5x5_door()
-    minetest.log("closing 5x5 door!")
     local pos1 = {x = -12, y = 29, z = 9}
     minetest.swap_node(pos1, {name="doors:door_glass_a", param2=0})
     local pos2 = {x = -11, y = 29, z = 9}
@@ -310,7 +296,6 @@ local function close_5x5_door()
 end
 
 local function open_8x8_door()
-    minetest.log("opening 8x8 door!")
     local pos1 = {x = -11, y = 29, z = 33}
     local pos2 = {x = -10, y = 29, z = 33}
     local above = {x = 0 , y=1 , z = 0}
@@ -323,7 +308,6 @@ local function open_8x8_door()
 end
 
 local function close_8x8_door()
-    minetest.log("closing 8x8 door!")
     local pos1 = {x = -11, y = 29, z = 33}
     local pos2 = {x = -10, y = 29, z = 33}
     local above = {x = 0 , y=1 , z = 0}
@@ -336,7 +320,6 @@ local function close_8x8_door()
 end
 
 local function open_final_door()
-    minetest.log("opening final door!")
     local pos1 = {x = -20, y=29, z=14} 
     local pos2 = {x = -21, y=29, z=14} 
 
@@ -350,7 +333,6 @@ local function open_final_door()
 end
 
 local function close_final_door()
-    minetest.log("closing final door!")
     local pos1 = {x = -20, y=29, z=14} 
     local pos2 = {x = -21, y=29, z=14} 
     local above = {x = 0 , y=1 , z = 0}
@@ -361,6 +343,22 @@ local function close_final_door()
     minetest.sound_play({name = "scifi_nodes_door_normal", gain = 1},
 			{pos = pos1}, true)
 end
+
+local function endGame(name) 
+    -- Define your styled text
+    local text1 = "<style size=30><b>Congratulations!</b></style>"
+    local text2 = "<style size=20>You've completed all of the puzzles in the game! Thank you for playing, and please leave a review on the content database if you enjoyed playing the game!</style>"
+    local text3 = "<style size=20>Press the button below to restart the game from the beginning!</style>"
+    -- Combine the text using the hypertext element
+    local hypertext = "hypertext[0.5,0.5;7,6;;" .. text1 .. "\n\n" .. text2 .. "\n\n" .. text3 .. "]"
+    minetest.show_formspec(name, "gridlock:congrats",
+        "size[8,8]" ..
+        hypertext ..
+        "button_exit[3,7;2,1;exit;Restart]")
+end
+
+
+
 --general player progression function
 --called after a successful win_check
 local function progress(player)
@@ -384,7 +382,8 @@ local function progress(player)
         open_8x8_door()
     end
     if Gridlock.board_n == 4 and Gridlock.puzzle_n == 6 then
-        minetest.log("END OF GAME GOES HERE!")
+        Gridlock.board_n = 5
+        endGame(player:get_player_name())
         return
     end
     
@@ -476,7 +475,6 @@ end
 minetest.register_node(modname .. ":trigger", {
     description = "gridlock block: trigger",
     tiles = {blank, blank, blank, blank, blank, "gridlock_trigger.png" },
-    --groups = {oddly_breakable_by_hand = 3},
     on_punch = function(pos, node, puncher, pointed_thing)
         if #Gridlock.statements >= Gridlock.boards[Gridlock.board_n].max_statements then
             return
@@ -495,7 +493,6 @@ minetest.register_node(modname .. ":trigger", {
     paramtype2 = "facedir",
     on_place = function(itemstack, placer, pointed_thing)		
 		local param2 = minetest.dir_to_facedir(placer:get_look_dir())
-			
 		minetest.item_place(itemstack, placer, pointed_thing, param2)	
 	end
 })
@@ -504,45 +501,38 @@ minetest.register_node(modname .. ":trigger", {
 minetest.register_node(modname .. ":clear", {
     description = "gridlock block: clear",
     tiles = {"gridlock_clear.png" },
-   --groups = {oddly_breakable_by_hand = 3},
     on_punch = function(pos, node, puncher, pointed_thing)
         clear_statements()
         Gridlock.statements = {}
         update_board(function() return true end , modname .. ":color_0")
     end,
-  --  light_source = 3,
 })
 
 --toggle the coordinate labels on and off
 minetest.register_node(modname .. ":toggle_labels", {
     description = "gridlock block: toggle labels",
     tiles = {"gridlock_coords_toggle.png" },
-   --groups = {oddly_breakable_by_hand = 3},
     on_punch = function(pos, node, puncher, pointed_thing)
         Gridlock.labels = not Gridlock.labels
         update_labels()
-        
     end,
 })
 
 --a basic gray brick for building
 minetest.register_node(modname .. ":brick", {
     description = "gridlock block: brick",
-   -- groups = {oddly_breakable_by_hand = 3},
     tiles = {blank, blank, blank, blank, blank, blank },
 })
 
 --the tray blocks are where token blocks can be placed
 minetest.register_node(modname .. ":tray", {
     description = "gridlock block: tray",
-    --groups = {oddly_breakable_by_hand = 3},
     tiles = {blank, blank, blank, blank, blank, blank }
 })
 
 --the colortray accepts the color blocks for a statement
 minetest.register_node(modname .. ":colortray", {
     description = "gridlock block: colortray",
-    --groups = {oddly_breakable_by_hand = 3},
     tiles = {"gridlock_colortray.png", blank, blank, blank, blank, blank },
 })
 
@@ -563,13 +553,10 @@ for i = 0, 15 do
             local node = minetest.get_node(pos)
             if node.name == modname .. ":colortray" then
                 minetest.item_place(itemstack, placer, pointed_thing)	
-                -- return itemstack
             end
             return nil
         end,
         drop={},
-        
-       -- light_source = 3,
     })
     --these are the colorblocks that are used on the grid itself
     minetest.register_node(modname .. ":color_" .. i .. "_grid", {
@@ -591,25 +578,20 @@ for i = 0, 15 do
                 yaw = math.pi/2
             }
         },
-        on_punch = function(pos, node, puncher, pointed_thing)
-            -- minetest.log(dump(pos))
-            -- display_api.update_entities()
-        end,
         on_place = display_api.on_place,
         on_destruct = display_api.on_destruct,
         on_blast = display_api.on_blast,
         on_rotate = display_api.on_rotate,
         on_construct = 	function(pos)
             set_fields(pos, "")
-            --update_labels()
             display_api.on_construct(pos)
         end,
         on_receive_fields = set_fields
-        --  light_source = 3,
         })
 end
 
-
+--a staggered fourcefield with 16 separate sheets
+--the on_place function assists in putting them down
 for i = 1, 16 do
     minetest.register_node(modname .. ":forcefield_" .. i, {
         description = "Forcefield " .. i,
@@ -632,14 +614,12 @@ for i = 1, 16 do
             }
         }},
         on_place =function(itemstack, placer, pointed_thing) 
-            minetest.log(dump(pointed_thing))
             local n = 0
             local pos = table.copy(pointed_thing.above)
             
             while true do
                 
                 local index = (i + n) % 16
-                minetest.log(index)
                 if index == 0 then index = 1 end
                 minetest.set_node(pos, {name=modname .. ":forcefield_" .. index})
                 pos.x = pos.x+1
@@ -668,11 +648,9 @@ end
 --in 16x16 they might be split into 4 cubes
 function register_puzzle_node(room, puzzle) 
     local name = modname .. ":puz_" .. room .. "_" .. puzzle
-    
     local blank = "gridlock_blank.png"
     if room == 1 then blank = "default_cobble.png" end
     local tiles = nil
-    
     if room < 3 then 
         local fn =  modname .. "_puzzle_" .. room .. "_" .. puzzle .. ".png"
         if room == 1 then tiles = {blank, blank, fn, blank, blank, blank } end
@@ -686,7 +664,6 @@ function register_puzzle_node(room, puzzle)
     else
         for n = 1, 4 do
             local fn =  modname .. "_puzzle_" .. room .. "_" .. puzzle ..  "_" .. n ..".png"
-            minetest.log(fn)
             if room == 3 then tiles = {blank, blank, fn, blank, blank, blank } end
             if room == 4 then tiles = {blank, blank, blank, fn, blank, blank } end
             minetest.register_node(name .. "_" .. n, {
@@ -697,8 +674,6 @@ function register_puzzle_node(room, puzzle)
             })
         end
     end
-
-    
 end
 
 --room 1 has 3 3x3 puzzles
@@ -716,18 +691,36 @@ for room = 2, 2 do
     
 end
 
+--room 3 has 3 8x8 puzzles
 for room = 3, 3 do
     for puzzle = 1, 8 do
         register_puzzle_node(room, puzzle)
     end
 end
 
+--room 4 has 5 16x16 puzzles
 for room = 4, 4 do
     for puzzle = 1, 5 do
         register_puzzle_node(room, puzzle)
     end
 end
 
+local function spawn(player)
+    player:set_pos(Gridlock.spawn_point)
+    local meta = player:get_meta()
+    --progression
+    Gridlock.board_n = 1
+    Gridlock.puzzle_n = 1
+    meta:set_int("board_n", Gridlock.board_n)
+    meta:set_int("puzzle_n", Gridlock.puzzle_n)
+    Gridlock.statements = {}
+
+    minetest.after(1, function()
+        --load the puzzle onto the wall and slam the door (noise)
+        update_puzzle()
+        minetest.sound_play({name = "xpanes_steel_bar_door_close", gain = 0.5},{pos = player:get_pos()}, true)
+    end)
+end
 
 minetest.register_on_newplayer(function(player)
     --the inventory is 9x5
@@ -744,21 +737,7 @@ minetest.register_on_newplayer(function(player)
         inv:add_item("main", ItemStack(modname .. ":color_" .. i ))
     end
     --spawn
-    player:set_pos(Gridlock.spawn_point)
-    local meta = player:get_meta()
-    --progression
-    Gridlock.board_n = 1
-    Gridlock.puzzle_n = 1
-    meta:set_int("board_n", Gridlock.board_n)
-    meta:set_int("puzzle_n", Gridlock.puzzle_n)
-    Gridlock.statements = {}
-
-    minetest.after(1, function()
-        --load the puzzle onto the wall and slam the door (noise)
-
-        update_puzzle()
-        minetest.sound_play({name = "xpanes_steel_bar_door_close", gain = 0.5},{pos = puzzle_pos}, true)
-    end)
+    spawn(player)
 end)
 
 minetest.register_on_joinplayer(function(player)
@@ -777,8 +756,6 @@ minetest.register_on_joinplayer(function(player)
     if Gridlock.puzzle_n == 0 then
         Gridlock.puzzle_n = 1
     end
-    -- minetest.log("board_n:" .. Gridlock.board_n)
-    -- minetest.log("puzzle:" .. Gridlock.puzzle_n)
     -- load the puzzle onto the wall
     update_puzzle()
     --this reads back in the statements off of the wall
@@ -787,10 +764,20 @@ minetest.register_on_joinplayer(function(player)
     minetest.after(1, read_in_statements)
 end)
 
+-- Register callback for endGame formspec
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+    if formname ~= "gridlock:congrats" then
+        return false
+    end
+    spawn(player)
+    return true
+end)
+
 --a very basic inventory 
 local oldFormspec = sfinv.make_formspec
 function sfinv.make_formspec(player, context, content, show_inv, size)
     local player_name = player:get_player_name()
+    --give us the normal creative inventory
     if minetest.is_creative_enabled(player_name) then
         return oldFormspec(player, context, content, show_inv, size)
     else
@@ -806,10 +793,12 @@ function sfinv.make_formspec(player, context, content, show_inv, size)
     
 end
 
+--prevent dropping of items
 minetest.item_drop = function(itemstack, dropper, pos)
     return itemstack
 end
 
+--stop items from being diggable
 local no_digs = {
     "xpanes:pane_flat",
     "default:torch_wall",
@@ -846,6 +835,7 @@ minetest.register_globalstep(function(dtime)
         local pos5b = {x = -21, y=29, z=13} --final sliding door close 2
         local meta = player:get_meta()
         
+        --deal with progress flags and doors
         if isSamePos(pos, pos1) then --basement
             if meta:get_int("flag1") == 0 then
                 meta:set_int("flag1", 1)
@@ -878,3 +868,69 @@ minetest.register_globalstep(function(dtime)
         end
     end
 end)
+
+
+-- Table mapping each board number to the corresponding sound file
+local room_sounds = {
+    [1] = {key = "cloud_8", gain = 0.5},
+    [2] = {key = "planet_metal", gain = 0.5},
+    [3] = {key = "el_grande_diamonte_del_mundo_profundo", gain = 0.6},
+    [4] = {key = "three_chord_rock", gain = 0.5},
+    [5] = {key = "lord_of_happy", gain = 0.2},
+}
+
+-- Variable to store the current sound handle
+local current_handle = nil
+
+-- Function to update room audio
+local function update_room_audio(board_n)
+    -- Stop the currently playing sound with a fade-out effect (if possible)
+    if current_handle then
+        minetest.sound_fade(current_handle, 0.5, 0.0) -- Adjust fade-out duration if needed
+    end
+
+    -- Get the sound for the new room
+    local sound = room_sounds[board_n]
+    if sound then
+        -- Play the new sound on loop
+
+        current_handle = minetest.sound_play( {
+            name = sound.key,
+            gain = sound.gain,
+            loop = true,
+        })
+    end
+end
+
+-- Call this function whenever Gridlocks.board_n changes
+-- For example:
+minetest.after(3, function() 
+    minetest.register_globalstep(function()
+        local board_n = Gridlock.board_n
+        if board_n ~= Gridlock.last_board_n then
+            Gridlock.last_board_n = board_n
+            update_room_audio(board_n)
+        end
+        
+    end)
+end)
+
+
+--debug command for setting progress
+minetest.register_chatcommand("gl-progress", {
+	params = "gridlock",
+	description = "Set your progress",
+	privs = {server = true},
+	func = function(name, param)
+		local p = string.split(param, " ", false, 2, false)
+		if #p == 2 then
+			Gridlock.board_n = tonumber(p[1])
+			Gridlock.puzzle_n = tonumber(p[2])
+            
+			return true, "Progression set!"
+		else
+			return false, "Usage: /gl-progress board_n puzzle_n"
+		end
+	end
+})
+
