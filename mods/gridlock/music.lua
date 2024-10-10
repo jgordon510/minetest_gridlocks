@@ -8,8 +8,6 @@ local room_music = {
 }
 
 local current_handle = nil
-
-
 local function update_room_audio(board_n)
     -- stop the currently playing sound with a fade-out (if it exists)
     if current_handle then
