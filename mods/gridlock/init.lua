@@ -553,7 +553,8 @@ minetest.register_node(modname .. ":brick", {
 --the tray blocks are where token blocks can be placed
 minetest.register_node(modname .. ":tray", {
     description = "gridlock block: tray",
-    tiles = { blank, blank, blank, blank, blank, blank }
+    tiles = { blank, blank, blank, blank, blank, blank },
+    light_source = 11,
 })
 
 --the colortray accepts the color blocks for a statement
