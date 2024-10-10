@@ -423,6 +423,7 @@ end
 --the "tokens" or blocks that make up a statement (numbers, x, y, operators, etc.)
 display_api.register_display_entity(modname .. ":blockdisplay")
 local blank = "gridlock_blank.png"
+local gray = "gridlock_gray.png"
 for key, value in pairs(Gridlock.blocks) do
     local fn = "gridlock_" .. key .. ".png"
     local aspect = 1
@@ -431,7 +432,7 @@ for key, value in pairs(Gridlock.blocks) do
     end
     minetest.register_node(modname .. ":" .. key, {
         description = Gridlock.block_names[key],
-        tiles = { blank, blank, blank, blank, blank, blank },
+        tiles = { blank, blank, gray, blank, blank, blank },
         inventory_image = fn,
         groups = { oddly_breakable_by_hand = 3, display_api = 1, not_in_creative_inventory = 1 },
         --paramtype2 = "facedir",
@@ -472,7 +473,7 @@ for key, value in pairs(Gridlock.blocks) do
     --likewise, these blocks are used to make the statement blocks on the back wall
     minetest.register_node(modname .. ":" .. key .. "_statement", {
         description = "gridlock block: " .. key .. "(statement)",
-        tiles = { blank },
+        tiles = { blank, blank, blank, blank, blank, gray },
         paramtype2 = "facedir",
         groups = { not_in_creative_inventory = 1 },
         display_entities = {
