@@ -146,7 +146,7 @@ local function read_from(pos, colorBlockName)
         z = z + 1
         iters = iters + 1
 
-        if node.name == "air" then --todo fixme
+        if node.name == "air" then --deprecated
             reading = false
         else
             local name = string.gsub(node.name, modname .. ":", "")
@@ -638,24 +638,7 @@ for i = 1, 16 do
                 aspect_h = 9,
                 length = 2,
             }
-        } },
-        -- on_place = function(itemstack, placer, pointed_thing)
-        --     local n = 0
-        --     local pos = table.copy(pointed_thing.above)
-
-        --     while true do
-
-        --         local index = (i + n) % 16
-        --         if index == 0 then index = 1 end
-        --         minetest.set_node(pos, {name=modname .. ":forcefield_" .. index})
-        --         pos.x = pos.x+1
-        --         local node = minetest.get_node(pos)
-        --         if node.name == "scifi_nodes:white2" then
-        --             return
-        --         end
-        --         n=n+1
-        --     end
-        -- end
+        } }
     })
 end
 
@@ -834,9 +817,6 @@ for _, name in pairs(no_digs) do
     })
 end
 
-
-
-
 minetest.register_globalstep(function(dtime)
     for _, player in ipairs(minetest.get_connected_players()) do
         local pos = vector.round(player:get_pos())
@@ -904,6 +884,9 @@ minetest.register_chatcommand("gl-progress", {
     end
 })
 
+--these are helper commands that clear and place the force_fields
+--they shoudl be removed in the final game, but will come in handy
+--if the final room needs resizing
 minetest.register_chatcommand("gl-clear", {
     params = "gridlock",
     description = "clear force fields",
