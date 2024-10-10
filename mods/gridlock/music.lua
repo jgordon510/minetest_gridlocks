@@ -1,4 +1,4 @@
--- Table mapping each board number to the corresponding sound file
+-- Table mapping each board number to the corresponding sound file and gain level
 local room_music = {
     [1] = {key = "cloud_8", gain = 0.5},
     [2] = {key = "planet_metal", gain = 0.5},
@@ -6,21 +6,20 @@ local room_music = {
     [4] = {key = "three_chord_rock", gain = 0.5},
     [5] = {key = "lord_of_happy", gain = 0.2},
 }
--- Variable to store the current sound handle
+
 local current_handle = nil
 
--- Function to update room audio
+
 local function update_room_audio(board_n)
-    -- Stop the currently playing sound with a fade-out effect (if possible)
+    -- stop the currently playing sound with a fade-out (if it exists)
     if current_handle then
-        minetest.sound_fade(current_handle, 0.5, 0.0) -- Adjust fade-out duration if needed
+        minetest.sound_fade(current_handle, 0.5, 0.0) 
     end
 
-    -- Get the sound for the new room
+    -- get the sound for the new room
     local sound = room_music[board_n]
     if sound then
         -- Play the new sound on loop
-
         current_handle = minetest.sound_play( {
             name = sound.key,
             gain = sound.gain,
