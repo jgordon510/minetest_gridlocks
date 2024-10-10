@@ -18,8 +18,7 @@ local function update_room_audio(board_n)
     local sound = room_music[board_n]
     if sound then
         -- Play the new sound on loop
-        current_handle = minetest.sound_play( {
-            name = sound.key,
+        current_handle = minetest.sound_play(sound.key,  {
             gain = sound.gain,
             loop = true,
         })

@@ -430,7 +430,7 @@ for key, value in pairs(Gridlock.blocks) do
         aspect = 1 / 2
     end
     minetest.register_node(modname .. ":" .. key, {
-        description = "gridlock block: " .. key,
+        description = Gridlock.block_names[key],
         tiles = { blank, blank, blank, blank, blank, blank },
         inventory_image = fn,
         groups = { oddly_breakable_by_hand = 3, display_api = 1, not_in_creative_inventory = 1 },
@@ -569,7 +569,7 @@ for i = 0, 15 do
     local fn = "gridlock_col" .. i .. ".png"
     --these are the statement color blocks that the user places on the tray
     minetest.register_node(modname .. ":color_" .. i, {
-        description = "gridlock block: color " .. i,
+        description = Gridlock.color_names[i],
         tiles = { blank, blank, fn, blank, blank, blank },
         inventory_image = fn,
         groups = { oddly_breakable_by_hand = 3, not_in_creative_inventory = 1 },

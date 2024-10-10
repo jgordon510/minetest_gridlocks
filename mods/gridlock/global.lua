@@ -51,6 +51,37 @@ Gridlock.blocks = {
     paren2 = ')'
 }
 
+Gridlock.block_names = {
+    x = 'x',
+    y = 'y',
+    eq = 'equal to',
+    neq = 'not equal to',
+    gt = 'greater than',
+    lt = 'less than',
+    gte = 'greater than / equal',
+    lte = 'less than / equal',
+    _or = 'or',
+    _and = 'and',
+    _not = 'not',
+    _0 = '0',
+    _1 = '1',
+    _2 = '2',
+    _3 = '3',
+    _4 = '4',
+    _5 = '5',
+    _6 = '6',
+    _7 = '7',
+    _8 = '8',
+    _9 = '9',
+    add = '+',
+    sub = '-',
+    mul = '*',
+    mod = 'modulo',
+    div = '/',
+    abs = 'absolute value',
+    paren1 = '(',
+    paren2 = ')'
+}
 Gridlock.display_labels = {
     x = 'x',
     y = 'y',
@@ -83,6 +114,24 @@ Gridlock.display_labels = {
     paren2 = ')'
 }
 
+Gridlock.color_names = {
+    [0] = "black",
+    [1] = "dark blue",
+    [2] = "purple",
+    [3] = "green",
+    [4] = "brown",
+    [5] = "dark grey",
+    [6] = "light grey",
+    [7] = "white",
+    [8] = "red",
+    [9] = "orange",
+    [10] = "yellow",
+    [11] = "lime green",
+    [12] = "sky blue",
+    [13] = "lavender",
+    [14] = "pink",
+    [15] = "khaki"
+}
 Gridlock.load_order = { "x", "y", "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_9", "add", "sub", "mul", "div",
     "eq", "neq", "gt", "lt", "gte", "lte", "_or", "_and", "_not", "mod", "abs", "paren1", "paren2" }
 Gridlock.boards = {
