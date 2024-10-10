@@ -86,10 +86,10 @@ Gridlock.display_labels = {
 Gridlock.load_order = { "x", "y", "_0", "_1", "_2", "_3", "_4", "_5", "_6", "_7", "_8", "_9", "add", "sub", "mul", "div",
     "eq", "neq", "gt", "lt", "gte", "lte", "_or", "_and", "_not", "mod", "abs", "paren1", "paren2" }
 Gridlock.boards = {
-    {                                        --3x3
+    {                                                --3x3
         statements_pos = { x = -15, y = 22, z = 3 }, --{x = 14, y = 2, z = -5}, --add one to x
-        board_pos = { x = -19, y = 28, z = 1 }, --{x = 11, y=8, z = -1}, add 4 to y
-        puzzle_pos = { x = -17, y = 23, z = 4 }, --{x = 9, y=3, z = -3},
+        board_pos = { x = -19, y = 28, z = 1 },      --{x = 11, y=8, z = -1}, add 4 to y
+        puzzle_pos = { x = -17, y = 23, z = 4 },     --{x = 9, y=3, z = -3},
         puzzle_param2 = 1,
         size = { w = 3, h = 3 },
         tray_width = 3,
@@ -103,7 +103,7 @@ Gridlock.boards = {
         puzzle_param2 = 0,
         size = { w = 5, h = 5 },
         tray_width = 9,
-        max_statements = 6, 
+        max_statements = 6,
         border_node = "scifi_nodes:white2"
     },
     { --8x8
@@ -113,7 +113,7 @@ Gridlock.boards = {
         puzzle_param2 = 0,
         size = { w = 8, h = 8 },
         tray_width = 13,
-        max_statements = 10, 
+        max_statements = 10,
         border_node = "scifi_nodes:white2"
     },
     { --16x16
@@ -122,8 +122,8 @@ Gridlock.boards = {
         puzzle_pos = { x = -19, y = 31, z = 12 },
         puzzle_param2 = 0,
         size = { w = 16, h = 16 },
-        tray_width = 15,
-        max_statements = 16, 
+        tray_width = 16,
+        max_statements = 17,
         border_node = "scifi_nodes:white2"
     },
     --todo board 4 here
@@ -193,7 +193,7 @@ Gridlock.puzzles = {
             "33330"
         },
     },
-    { --room 3
+    {     --room 3
         { --3/8 ninja white 6 tan 15 red 8 gray 5 black 0 (5)
             "00000000",
             "88888888",
@@ -276,7 +276,7 @@ Gridlock.puzzles = {
         },
     },
     {
-        --arrow
+        --arrow (10)
         --blue      c
         --ltgreen   b
         --dkgreen   3
@@ -301,6 +301,30 @@ Gridlock.puzzles = {
             "cccccccccccc667c",
             "ccccccccccccc55c",
             "cccccccccccccccc",
+        },
+        --sword
+        --purple    2
+        --plum      d
+        --dkgrey    5
+        --ltgrey    6
+        --brown     4
+        {
+            "2222222222222000",
+            "22222222222206d0",
+            "2222222222206d50",
+            "222222222206d502",
+            "22222222206d5022",
+            "2222222206d50222",
+            "222002206d502222",
+            "22206006d5022222",
+            "2220660d50222222",
+            "222006d002222222",
+            "22220d5502222222",
+            "2220400550222222",
+            "2204020000222222",
+            "2040222222222222",
+            "0402222222222222",
+            "0022222222222222",
         },
         --heart
         --pink      e
@@ -373,29 +397,5 @@ Gridlock.puzzles = {
             "eeee0a0eeeeeeeee",
             "eeeee0eeeeeeeeee",
         },
-        --sword
-        --purple    2
-        --plum      d
-        --dkgrey    5
-        --ltgrey    6
-        --brown     4
-        {
-            "2222222222222000",
-            "22222222222206d0",
-            "2222222222206d50",
-            "222222222206d502",
-            "22222222206d5022",
-            "2222222206d50222",
-            "222002206d502222",
-            "22206006d5022222",
-            "2220660d50222222",
-            "222006d002222222",
-            "22220d5502222222",
-            "2220400550222222",
-            "2204020000222222",
-            "2040222222222222",
-            "0402222222222222",
-            "0022222222222222",
-        }
     }
 }
