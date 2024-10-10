@@ -30,7 +30,6 @@ local function update_room_audio(board_n)
 end
 
 -- Call this function whenever Gridlocks.board_n changes
--- For example:
 minetest.after(3, function() 
     minetest.register_globalstep(function()
         local board_n = Gridlock.board_n
@@ -38,6 +37,5 @@ minetest.after(3, function()
             Gridlock.last_board_n = board_n
             update_room_audio(board_n)
         end
-        
     end)
 end)
