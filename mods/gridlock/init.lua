@@ -795,6 +795,7 @@ function sfinv.make_formspec(player, context, content, show_inv, size)
     local player_name = player:get_player_name()
     --give us the normal creative inventory
     if minetest.is_creative_enabled(player_name) then
+        minetest.log("here!")
         return oldFormspec(player, context, content, show_inv, size)
     else
         local formspec = {
