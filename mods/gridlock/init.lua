@@ -86,6 +86,7 @@ end
 
 --show/hide the coordinate labels on the board
 local function update_labels()
+    minetest.log("updating labels")
     local size = Gridlock.boards[Gridlock.board_n].size
     local half_w = math.floor(size.w / 2)
     local half_h = math.floor(size.h / 2)
@@ -254,9 +255,9 @@ local function win_check()
             local char = chars[tonumber(name)]
             line = line .. char
         end
-        --minetest.log(line)
+        minetest.log(line)
         local puzzleLine = Gridlock.puzzles[Gridlock.board_n][Gridlock.puzzle_n][y]
-        --minetest.log(puzzleLine)
+        minetest.log(puzzleLine)
         if line ~= puzzleLine then return false end
     end
     return true
@@ -511,7 +512,7 @@ minetest.register_node(modname .. ":trigger", {
         if string.match(colorNode.name, modname .. ":color") then
             read_from(pos, colorNode.name)
         end
-
+        update_labels()
         if win_check() then
             minetest.sound_play({ name = "gridlock_success", gain = 1 },
                 { pos = pos }, true)
@@ -533,6 +534,7 @@ minetest.register_node(modname .. ":clear", {
         clear_statements()
         Gridlock.statements = {}
         update_board(function() return true end, modname .. ":color_0")
+        update_labels()
     end,
 })
 
