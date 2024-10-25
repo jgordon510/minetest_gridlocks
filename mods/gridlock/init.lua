@@ -254,8 +254,9 @@ local function win_check()
             local char = chars[tonumber(name)]
             line = line .. char
         end
-
+        --minetest.log(line)
         local puzzleLine = Gridlock.puzzles[Gridlock.board_n][Gridlock.puzzle_n][y]
+        --minetest.log(puzzleLine)
         if line ~= puzzleLine then return false end
     end
     return true
