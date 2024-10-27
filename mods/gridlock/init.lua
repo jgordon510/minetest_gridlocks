@@ -389,8 +389,10 @@ end
 --called after a successful win_check
 local function progress(player)
     clear_statements()
+    
     Gridlock.statements = {}
     update_board(function() return true end, modname .. ":color_0")
+    update_labels()
     Gridlock.puzzle_n = Gridlock.puzzle_n + 1
     if Gridlock.board_n == 1 and Gridlock.puzzle_n == 4 then
         Gridlock.board_n = 2
