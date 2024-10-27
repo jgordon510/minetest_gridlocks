@@ -726,6 +726,25 @@ local function spawn(player)
     end)
 end
 
+local function welcome(name)
+    -- Define your styled text
+    local text1 ="<style size=20><i>What is this place?  Who am I? Where did I come from?</i></style>"
+    local text2 ="<style size=20>Your mind is completely blank.  You have no recollection of your life before this strange place.</style>"
+    local text3 ="<style size=20>The room you're standing in is cold and dank. There is a locked gate preventing you from leaving.  </style>"
+    local text4 ='<style size=20>A large screen faintly glows a dim black on the wall above you.   On another wall are two squares you recognize as "interaction squares", though you are not sure how you know that.  One square with a skull will clear the screen.  Another labels it with coordinates, and allows you to toggle them on and off.  </style>'
+    local text5 ="<style size=20>Near the door, is a square on the floor that will accept one of the colored blocks in your inventory.  A tray in front of you will accept the blocks that have numbers and mathematical symbols on them. </style>"
+    local text6 ="<style size=20>Pressing the checkmark block will commit your statement to the board.  Numbers and variables are always true and will highlight the entire screen in a given color.  But longer statements will allow you to color specific squares on the grid. </style>"
+    local text7 ="<style size=20>The room offers no adornment, aside from a simple painting of a blue sky.  A vague memory stirs inside of you.  You are in a nondescript office cubicle working on a computer.  Lines of mathematical symbols appear as a jumbled mess on your screen.  You feel the creeping nausea of frustration, and decide to take a break to walk outside.  </style>"
+    local text8 ="<style size=20>Once in the parking lot, you tilt your head back and open your eyes wide to take in the endless plane of pale blue. </style>"
+    local text9 ="<style size=20>And that's when you arrived here.</style>"
+    -- Combine the text using the hypertext element
+    local hypertext = "hypertext[0.5,0.5;11.5,7;;" .. text1 .. "\n\n" .. text2 .. "\n\n" .. text3 .."\n\n" .. text4 .."\n\n" .. text5 .."\n\n" .. text6 .."\n\n" .. text7 .."\n\n" .. text8 .."\n\n" .. text9 .. "]"
+    minetest.show_formspec(name, "gridlock:welcome",
+        "size[12,8]" ..
+        hypertext ..
+        "button_exit[4.5,7;2,1;exit;Begin]")
+end
+
 minetest.register_on_newplayer(function(player)
     --the inventory is 9x5
     --this includes 29 token blocks...
@@ -740,6 +759,7 @@ minetest.register_on_newplayer(function(player)
     end
     --spawn
     spawn(player)
+    welcome(player:get_player_name())
 end)
 
 minetest.register_on_joinplayer(function(player)
