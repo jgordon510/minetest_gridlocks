@@ -575,7 +575,7 @@ for i = 0, 15 do
     --these are the statement color blocks that the user places on the tray
     minetest.register_node(modname .. ":color_" .. i, {
         description = Gridlock.color_names[i],
-        tiles = { blank, blank, fn, blank, blank, blank },
+        tiles = { fn },
         inventory_image = fn,
         groups = { oddly_breakable_by_hand = 3, not_in_creative_inventory = 1 },
         on_place = function(itemstack, placer, pointed_thing)
