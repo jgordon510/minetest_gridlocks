@@ -122,6 +122,8 @@ local function update_board(f, colorBlockName)
             if f() then
                 minetest.set_node(nodePos, { name = colorBlockName .. "_grid" })
             end
+            
+            
         end
     end
 end
@@ -176,9 +178,15 @@ local function read_from(pos, colorBlockName)
         z = z + 1
     end
     minetest.remove_node(vector.add(COLOR_INPUT_POS, pos))
-    table.insert(Gridlock.statements, block_names)
-    update_statements()
-    update_board(f, colorBlockName)
+    
+    if pcall(f) then
+        table.insert(Gridlock.statements, block_names)
+        update_statements()
+        update_board(f, colorBlockName)
+    else
+        --rejected statement
+    end
+    
 end
 
 --reads in the existing statements from the back wall

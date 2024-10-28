@@ -1,11 +1,11 @@
-1-1 blue sky
+1-0 blue sky
 x                               light blue
 
-1-2 purple stripe
+1-1 purple stripe
 x                               red
 x == 1                          purple
 
-1-3 box
+1-2 box
 x                               pink
 x ~= 2                          green
 y ~= 2                          green
@@ -13,14 +13,14 @@ y ~= 2                          green
 2
 TODO room 2 solutions
 
-3-1 ninja 
+3-0 ninja 
 y > 1 && y < 4                  red
 x == 8 && y > 1 && y < 7        red
 y > 6 && x < 6                  gray
 y == 4 && (x == 1 || x == 4)    white
 y == 4 && (x == 3 || x == 6)    tan
 
-3-2 cool duck 
+3-1 cool duck 
 x                               gray
 x > 2                           white
 x == 2 && y == 1                white
@@ -29,7 +29,7 @@ y == 5 && x > 1 && x < 4        black
 y == 5 && x > 4 && x < 8        black
 y == 6 && x < 5                 yellow
 
-3-3 frog
+3-2 frog
 x                               green
 x==1 && y < 3                   gray
 x==5 && y < 3                   gray
@@ -39,7 +39,7 @@ x > 1 && y == 4                 black
 x==3 && y == 8                  gray
 x==7 && y == 8                  gray
 
-3-4 panda
+3-3 panda
 x                               white
 y == 8                          gray
 y < 3 && x < 3                  black
@@ -48,7 +48,7 @@ y == 5 && (x == 1 || x == 3)    black
 y == 7 && x < 3                 black
 y > 5 && x > 4 && x != 7        black
 
-3-5 skull
+3-4 skull
 x                               white
 x==2 && y == 4                  black
 x==6 && y == 4                  black
@@ -58,7 +58,7 @@ x==5 && y > 6                   black
 x>6 && y > 6                    gray
 x<2 && y > 6                    gray
 
-3-6 dorky duck
+3-5 dorky duck
 x				                light blue
 x < 4				            white
 x < 6 and y < 4			        brown
@@ -69,7 +69,7 @@ y == 6 and x > 3		        light blue
 x == 1 and y < 7		        brown
 x == 4 and y == 4		        white
 
-3-7 dude
+3-6 dude
 y < 3  				            light blue
 y > 3 				            chartreuse
 y == 3				            brown
@@ -81,7 +81,7 @@ y == 7 and (x == 3 || x == 7)	black
 y == 8 and x > 2 and x < 7	    blue
 y == 8 and x == 5		        gray
 
-3-8 snake
+3-7 snake
 x				                gray
 y == 1 && x == 8 		        green
 y == 2 && x > 1 		        green
@@ -92,3 +92,15 @@ y == 6 && x < 7 		        green
 y == 7 && x < 4 		        green
 y==6 && (x==1 || x==3) 		    black
 y == 8 && x == 1 		        red
+
+4-0 arrow
+x                                       light blue
+x == y && x > 3 && y < 14               brown
+x - y == 2 && y > 11 && y < 14          white
+y == 13 && x > 11 && x < 14             lightgray
+y == 14 && x > 12 && x < 15             gray
+x == 4 && y == 4                        gray
+x - y == 2 && y > 2 && y < 5            green
+x - y == 3 && y > 1 && y < 4            lightgreen
+y == 4 && x > 1 && x < 4                lightgreen
+y == 5 && x > 2 && x < 5                green
