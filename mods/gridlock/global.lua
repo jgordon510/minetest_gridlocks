@@ -431,7 +431,7 @@ Gridlock.puzzles = {
         {
             "eeeeeeeeee000eee",
             "eeeeeeeee09aa0ee",
-            "eeeeeeee0900a0ee",
+            "eeeeeeee0900aa0e",
             "eeeeeeee090e0a0e",
             "eeeeeeee09a00a0e",
             "eeeeeeee09aaa0ee",

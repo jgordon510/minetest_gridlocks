@@ -177,5 +177,5 @@ x > 8 and x < 14 and y > 2 and y < 6        black
 x + y == 16 and x > 10 and x < 14           yellow      
 x == 11 and y == 2                          orange      
 x == 10 and y > 2 and y < 6                 orange      
-x == 12 and y == 3                          pink        
+x == 12 and y == 4                          pink        
 x == 10 and y == 2                          black       
