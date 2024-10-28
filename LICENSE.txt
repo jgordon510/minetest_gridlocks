@@ -18,7 +18,7 @@ http://creativecommons.org/licenses/by-sa/3.0/
 
 License of source code
 ----------------------
-Copyright (C) 2010-2024 jgordon510, celeron55, Perttu Ahola <celeron55@gmail.com>
+Copyright (C) 2010-2024, celeron55, Perttu Ahola <celeron55@gmail.com>
 See README.txt in each mod directory for information about other authors.
 
                   GNU LESSER GENERAL PUBLIC LICENSE
