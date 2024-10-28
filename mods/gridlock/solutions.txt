@@ -1,5 +1,5 @@
 1-0 blue sky
-x                               light blue
+x                               sky blue
 
 1-1 purple stripe
 x                               red
@@ -16,12 +16,12 @@ TODO room 2 solutions
 3-0 ninja 
 y > 1 && y < 4                  red
 x == 8 && y > 1 && y < 7        red
-y > 6 && x < 6                  gray
+y > 6 && x < 6                  dark gray
 y == 4 && (x == 1 || x == 4)    white
-y == 4 && (x == 3 || x == 6)    tan
+y == 4 && (x == 3 || x == 6)    khaki
 
 3-1 cool duck 
-x                               gray
+x                               dark gray
 x > 2                           white
 x == 2 && y == 1                white
 y == 4 && x > 1                 black
@@ -31,17 +31,17 @@ y == 6 && x < 5                 yellow
 
 3-2 frog
 x                               green
-x==1 && y < 3                   gray
-x==5 && y < 3                   gray
+x==1 && y < 3                   dark gray
+x==5 && y < 3                   dark gray
 x==3 && y == 2                  black
 x==7 && y == 2                  black
 x > 1 && y == 4                 black
-x==3 && y == 8                  gray
-x==7 && y == 8                  gray
+x==3 && y == 8                  dark gray
+x==7 && y == 8                  dark gray
 
 3-3 panda
 x                               white
-y == 8                          gray
+y == 8                          dark gray
 y < 3 && x < 3                  black
 y < 3 && x > 3 && x < 6         black
 y == 5 && (x == 1 || x == 3)    black
@@ -55,34 +55,34 @@ x==6 && y == 4                  black
 x==4 && y == 5                  black
 x==3 && y > 6                   black
 x==5 && y > 6                   black
-x>6 && y > 6                    gray
-x<2 && y > 6                    gray
+x>6 && y > 6                    dark gray
+x<2 && y > 6                    dark gray
 
 3-5 dorky duck
-x				                light blue
+x				                sky blue
 x < 4				            white
 x < 6 and y < 4			        brown
 x > 2 and x < 5 and y == 1	    black
 y == 4 and (x == 3 || x == 5)	black
 x > 2 and y > 4 and y < 8	    yellow
-y == 6 and x > 3		        light blue
+y == 6 and x > 3		        sky blue
 x == 1 and y < 7		        brown
 x == 4 and y == 4		        white
 
 3-6 dude
-y < 3  				            light blue
-y > 3 				            chartreuse
+y < 3  				            sky blue
+y > 3 				            lime green
 y == 3				            brown
 y < 3 and x > 2 and x < 7	    brown
-y > 3 and x > 2 and x < 7	    tan
+y > 3 and x > 2 and x < 7	    khaki
 y == 4 and (x == 4 || x == 6) 	black
 y == 6 and x > 2 and x < 8	    black
 y == 7 and (x == 3 || x == 7)	black
 y == 8 and x > 2 and x < 7	    blue
-y == 8 and x == 5		        gray
+y == 8 and x == 5		        dark gray
 
 3-7 snake
-x				                gray
+x				                dark gray
 y == 1 && x == 8 		        green
 y == 2 && x > 1 		        green
 y == 3 && x == 2 		        green
@@ -98,11 +98,11 @@ x                                       blue
 x == y && x > 3 && y < 14               brown
 x - y == 1 && y > 12 && y < 15          white
 y == 14 && x > 12 && x < 15             lightgray
-y == 15 && x > 13 && x < 16             gray
-x == 4 && y == 4                        gray
+y == 15 && x > 13 && x < 16             dark gray
+x == 4 && y == 4                        dark gray
 x - y == 1 && y > 2 && y < 5            green
-x - y == 2 && y > 1 && y < 4            lightgreen
-y == 4 && x > 1 && x < 4                lightgreen
+x - y == 2 && y > 1 && y < 4            lime green
+y == 4 && x > 1 && x < 4                lime green
 y == 5 && x > 2 && x < 5                green
 
 
@@ -117,11 +117,11 @@ x == 11 && y > 8                        purple
 x + y == 17 && x > 1 && x < 6           brown
 x + y == 17 && x > 5 && x < 16          lavender
 x + y == 16 && x > 7 && x < 15          lightgray
-x + y == 18 && x > 8 && x < 16          gray
+x + y == 18 && x > 8 && x < 16          dark gray
 x == 5 && y > 7 && y < 10               lightgray
 x == 6 && y > 8 && y < 11               lightgray
-y == 12 && x > 7 && x < 10              gray
-y == 11 && x > 6 && x < 9               gray
+y == 12 && x > 7 && x < 10              dark gray
+y == 11 && x > 6 && x < 9               dark gray
 
 
 4-2 heart
@@ -144,7 +144,7 @@ x + y == 9 && x > 3 && x < 6            white
 x == 4 && y == 4                        pink  
 
 4-3 gem
-x + y < 16 && x + y > 8                 lightgreen
+x + y < 16 && x + y > 8                 lime green
 x + y == 14 || x + y > 15               green
 y == 2 && x > 5 && x < 11               black
 y == 15 && x > 5 && x < 12              black
@@ -156,10 +156,10 @@ x + y == 26 && x > 11 && x < 15         black
 y == 1 || x == 16 || y == 16            purple
 x + y < 7 || x + y > 26 || x == 1       purple
 x - y > 9 || y - x > 9                  purple
-y == 6 && x > 6 && x < 11               gray
-y == 11 && x > 6 && x < 1               gray
-x == 6 && y > 6 && y < 11               gray
-x == 11 && y > 6 && y < 11              gray
+y == 6 && x > 6 && x < 11               dark gray
+y == 11 && x > 6 && x < 1               dark gray
+x == 6 && y > 6 && y < 11               dark gray
+x == 11 && y > 6 && y < 11              dark gray
 
 4-4 key
 x + y < 15 && x < 9                     pink        
