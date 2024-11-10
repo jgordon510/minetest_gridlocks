@@ -1,0 +1,3 @@
+[submodule "mods/butterflies"]
+	path = mods/butterflies
+	url = https://github.com/minetest/minetest_game
