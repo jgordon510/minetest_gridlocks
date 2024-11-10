@@ -1,12 +1,6 @@
 [submodule "mods/butterflies"]
 	path = mods/butterflies
 	url = https://github.com/minetest/minetest_game
-[submodule "mods/creative"]
-	path = mods/creative
-	url = https://github.com/minetest/minetest_game
-[submodule "mods/default"]
-	path = mods/default
-	url = https://github.com/minetest/minetest_game
 [submodule "mods/doors"]
 	path = mods/doors
 	url = https://github.com/minetest/minetest_game
@@ -39,9 +33,6 @@
 	url = https://github.com/minetest/minetest_game
 [submodule "mods/xcompat"]
 	path = mods/xcompat
-	url = https://github.com/minetest/minetest_game
-[submodule "mods/xpanes"]
-	path = mods/xpanes
 	url = https://github.com/minetest/minetest_game
 [submodule "display_modpack"]
 	path = display_modpack
