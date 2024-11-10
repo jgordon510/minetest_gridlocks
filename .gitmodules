@@ -1,0 +1,15 @@
+[submodule "mods/scifi_nodes"]
+	path = mods/scifi_nodes
+	url = https://github.com/D00Med/scifi_nodes
+[submodule "mods/font_botic"]
+	path = mods/font_botic
+	url = https://github.com/pyrollo/font_botic
+[submodule "mods/display_modpack"]
+	path = mods/display_modpack
+	url = https://github.com/mt-mods/display_modpack
+[submodule "mods/xcompat"]
+	path = mods/xcompat
+	url = https://github.com/mt-mods/xcompat
+[submodule "mods/moreblocks"]
+	path = mods/moreblocks
+	url = https://github.com/minetest-mods/moreblocks
