@@ -1,0 +1,24 @@
+[submodule "mods/default"]
+	path = mods/default
+	url = https://github.com/minetest/minetest_game
+[submodule "mods/sfinv"]
+	path = mods/sfinv
+	url = https://github.com/minetest/minetest_game
+[submodule "mods/doors"]
+	path = mods/doors
+	url = https://github.com/minetest/minetest_game
+[submodule "mods/xpanes"]
+	path = mods/xpanes
+	url = https://github.com/minetest/minetest_game
+[submodule "display_modpack"]
+	path = display_modpack
+	url = https://github.com/mt-mods/display_modpack
+[submodule "mods/xcompat"]
+	path = mods/xcompat
+	url = https://github.com/minetest/minetest_game
+[submodule "font_botic"]
+	path = font_botic
+	url = https://github.com/pyrollo/font_botic
+[submodule "scifi_nodes"]
+	path = scifi_nodes
+	url = https://github.com/D00Med/scifi_nodes
