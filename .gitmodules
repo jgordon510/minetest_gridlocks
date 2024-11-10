@@ -13,3 +13,6 @@
 [submodule "mods/moreblocks"]
 	path = mods/moreblocks
 	url = https://github.com/minetest-mods/moreblocks
+[submodule "volumetric-lighting"]
+	path = volumetric-lighting
+	url = https://github.com/rollerozxa/volumetric-lighting
