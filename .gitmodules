@@ -16,3 +16,45 @@
 [submodule "volumetric-lighting"]
 	path = volumetric-lighting
 	url = https://github.com/rollerozxa/volumetric-lighting
+[submodule "default"]
+	path = default
+	url = https://github.com/minetest-game/default
+[submodule "butterflies"]
+	path = butterflies
+	url = https://github.com/minetest-game/butterflies
+[submodule "creative"]
+	path = creative
+	url = https://github.com/minetest-game/creative
+[submodule "doors"]
+	path = doors
+	url = https://github.com/minetest-game/doors
+[submodule "dye"]
+	path = dye
+	url = https://github.com/minetest-game/dye
+[submodule "farming"]
+	path = farming
+	url = https://github.com/minetest-game/farming
+[submodule "fireflies"]
+	path = fireflies
+	url = https://github.com/minetest-game/fireflies
+[submodule "flowers"]
+	path = flowers
+	url = https://github.com/minetest-game/flowers
+[submodule "player_api"]
+	path = player_api
+	url = https://github.com/minetest-game/player_api
+[submodule "sfinv"]
+	path = sfinv
+	url = https://github.com/minetest-game/sfinv
+[submodule "stairs"]
+	path = stairs
+	url = https://github.com/minetest-game/stairs
+[submodule "vessels"]
+	path = vessels
+	url = https://github.com/minetest-game/vessels
+[submodule "wool"]
+	path = wool
+	url = https://github.com/minetest-game/wool
+[submodule "xpanes"]
+	path = xpanes
+	url = https://github.com/minetest-game/xpanes
