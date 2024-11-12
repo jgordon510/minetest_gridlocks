@@ -55,3 +55,6 @@
 [submodule "mods/wool"]
 	path = mods/wool
 	url = https://github.com/minetest-game/wool
+[submodule "mods/sfinv"]
+	path = mods/sfinv
+	url = https://github.com/minetest-game/sfinv
