@@ -19,3 +19,39 @@
 [submodule "mods/xpanes"]
 	path = mods/xpanes
 	url = https://github.com/minetest-game/xpanes
+[submodule "mods/default"]
+	path = mods/default
+	url = https://github.com/minetest-game/default
+[submodule "mods/butterflies"]
+	path = mods/butterflies
+	url = https://github.com/minetest-game/butterflies
+[submodule "mods/creative"]
+	path = mods/creative
+	url = https://github.com/minetest-game/creative
+[submodule "mods/doors"]
+	path = mods/doors
+	url = https://github.com/minetest-game/doors
+[submodule "mods/dye"]
+	path = mods/dye
+	url = https://github.com/minetest-game/dye
+[submodule "mods/farming"]
+	path = mods/farming
+	url = https://github.com/minetest-game/farming
+[submodule "mods/fireflies"]
+	path = mods/fireflies
+	url = https://github.com/minetest-game/fireflies
+[submodule "mods/flowers"]
+	path = mods/flowers
+	url = https://github.com/minetest-game/flowers
+[submodule "mods/player_api"]
+	path = mods/player_api
+	url = https://github.com/minetest-game/player_api
+[submodule "mods/stairs"]
+	path = mods/stairs
+	url = https://github.com/minetest-game/stairs
+[submodule "mods/vessels"]
+	path = mods/vessels
+	url = https://github.com/minetest-game/vessels
+[submodule "mods/wool"]
+	path = mods/wool
+	url = https://github.com/minetest-game/wool
