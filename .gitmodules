@@ -55,6 +55,3 @@
 [submodule "wool"]
 	path = wool
 	url = https://github.com/minetest-game/wool
-[submodule "xpanes"]
-	path = xpanes
-	url = https://github.com/minetest-game/xpanes
