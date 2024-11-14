@@ -87,7 +87,6 @@ end
 
 --show/hide the coordinate labels on the board
 local function update_labels()
-    minetest.log("updating labels")
     local size = Gridlock.boards[Gridlock.board_n].size
     local half_w = math.floor(size.w / 2)
     local half_h = math.floor(size.h / 2)
@@ -264,9 +263,7 @@ local function win_check()
             local char = chars[tonumber(name)]
             line = line .. char
         end
-        minetest.log(line)
         local puzzleLine = Gridlock.puzzles[Gridlock.board_n][Gridlock.puzzle_n][y]
-        minetest.log(puzzleLine)
         if line ~= puzzleLine then return false end
     end
     return true
@@ -815,7 +812,6 @@ function sfinv.make_formspec(player, context, content, show_inv, size)
     local player_name = player:get_player_name()
     --give us the normal creative inventory
     if minetest.is_creative_enabled(player_name) then
-        minetest.log("here!")
         return oldFormspec(player, context, content, show_inv, size)
     else
         local formspec = {
@@ -929,7 +925,6 @@ minetest.register_chatcommand("gl-clear", {
     privs = { server = true },
     func = function(name, param)
         local player = minetest.get_player_by_name(name)
-        minetest.log(dump(player))
         local pos      = player.get_pos(player)
         local pos1     = vector.add(pos, { x = -25, y = -25, z = -25 })
         local pos2     = vector.add(pos, { x = 25, y = 25, z = 25 })
